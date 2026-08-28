@@ -1,4 +1,4 @@
-# News Assistant (دستیار خبری)
+# News Assistant 
 
 [فارسی](./README.fa.md)
 
