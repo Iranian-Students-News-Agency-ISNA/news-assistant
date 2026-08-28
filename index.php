@@ -1,7 +1,3 @@
-<?php
-$midnight = strtotime('today');
-$hours = round((time() - $midnight) / 3600, 1);
-?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -19,7 +15,7 @@ $hours = round((time() - $midnight) / 3600, 1);
   --serif:'Vazirmatn',sans-serif; --mono:'JetBrains Mono',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--serif);color:var(--hi);background:var(--bg);overflow-x:hidden;line-height:1.9;min-height:100vh}
+body{font-family:var(--serif);font-weight:500;color:var(--hi);background:var(--bg);overflow-x:hidden;line-height:1.9;min-height:100vh}
 canvas#bg{position:fixed;inset:0;z-index:-2;width:100%;height:100%}
 .vignette{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 35%,rgba(8,11,30,.55) 100%)}
 ::selection{background:var(--cyan);color:#04101c}
@@ -37,29 +33,30 @@ section{padding:9vh 6vw}
 .eyebrow::before{content:"";width:20px;height:1px;background:var(--cyan)}
 h1{font-size:clamp(30px,4.6vw,46px);font-weight:900;line-height:1.35;margin-bottom:12px}
 h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
-p.lead{color:var(--lo);font-size:15.5px;max-width:640px}
-.fresh{font-family:var(--mono);font-size:11.5px;color:var(--lo2);margin-top:10px}
+p.lead{color:var(--lo);font-weight:500;font-size:15.5px;max-width:640px}
 
 .searchbox{margin-top:38px;display:flex;gap:10px;background:var(--panel);border:1px solid var(--panel-b);border-radius:14px;padding:8px;backdrop-filter:blur(14px)}
-.searchbox input{flex:1;background:transparent;border:none;outline:none;color:var(--hi);font-family:var(--serif);font-size:15px;padding:12px 14px}
+.searchbox input{flex:1;background:transparent;border:none;outline:none;color:var(--hi);font-family:var(--serif);font-weight:500;font-size:15px;padding:12px 14px}
 .searchbox input::placeholder{color:var(--lo2)}
 .btn{font-family:var(--serif);font-weight:700;font-size:14.5px;padding:12px 26px;border-radius:10px;border:none;cursor:pointer;background:linear-gradient(90deg,var(--cyan),#5ec9ff);color:#04101c;box-shadow:0 0 18px rgba(63,216,255,.35);transition:.25s}
 .btn:hover{box-shadow:0 0 28px rgba(63,216,255,.6);transform:translateY(-1px)}
 .btn:disabled{opacity:.55;cursor:default;transform:none;box-shadow:none}
 
-.status{margin-top:22px;font-family:var(--mono);font-size:13px;color:var(--lo);min-height:20px}
-.answer-box{margin-top:20px;background:linear-gradient(155deg,rgba(63,216,255,.08),rgba(160,107,255,.06)),var(--panel);border:1px solid rgba(63,216,255,.3);border-radius:14px;padding:20px 22px}
-.answer-box .lbl{font-family:var(--mono);font-size:11px;color:var(--cyan);letter-spacing:.08em;margin-bottom:8px}
-.answer-box p{font-size:16px;font-weight:600;color:var(--hi);line-height:1.8}
-.sources-lbl{font-family:var(--mono);font-size:11.5px;color:var(--lo2);margin:20px 0 10px}
+.status{margin-top:22px;font-family:var(--mono);font-size:13px;font-weight:500;color:var(--lo);min-height:20px}
+.answer-box{position:relative;margin-top:24px;background:linear-gradient(155deg,rgba(63,216,255,.14),rgba(160,107,255,.09)),rgba(10,14,34,.9);border:1px solid rgba(63,216,255,.45);border-right:4px solid var(--cyan);border-radius:14px;padding:22px 24px;box-shadow:0 0 30px rgba(63,216,255,.12)}
+.answer-box .lbl{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--cyan);letter-spacing:.06em;margin-bottom:12px}
+.answer-box .lbl::before{content:"✦";font-size:13px}
+.short-badge{display:inline-block;font-weight:800;font-size:20px;color:#04101c;background:linear-gradient(90deg,var(--cyan),#5ec9ff);padding:4px 16px;border-radius:99px;margin-bottom:12px}
+.answer-box p{font-size:16px;font-weight:600;color:var(--hi);line-height:1.85}
+.sources-lbl{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--lo);margin:22px 0 12px}
 .results{display:flex;flex-direction:column;gap:14px}
 .card{background:var(--panel);border:1px solid var(--panel-b);border-radius:14px;padding:20px;backdrop-filter:blur(14px);transition:.25s}
 .card:hover{border-color:rgba(63,216,255,.35)}
-.tag{font-family:var(--mono);font-size:10.5px;color:var(--cyan);border:1px solid rgba(63,216,255,.35);padding:3px 9px;border-radius:99px;width:fit-content;margin-bottom:12px}
+.tag{font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--cyan);border:1px solid rgba(63,216,255,.35);padding:3px 9px;border-radius:99px;width:fit-content;margin-bottom:12px}
 .card h3{font-size:16.5px;font-weight:700;margin-bottom:8px}
 .card h3 a{color:var(--hi);text-decoration:none}
 .card h3 a:hover{color:var(--cyan)}
-.card p{font-size:13.5px;color:var(--lo)}
+.card p{font-size:13.5px;font-weight:500;color:var(--lo)}
 </style>
 </head>
 <body>
@@ -74,10 +71,9 @@ p.lead{color:var(--lo);font-size:15.5px;max-width:640px}
 
 <section>
   <div class="wrap">
-    <div class="eyebrow">دستیار خبری</div>
-    <h1>در هر موضوعی بپرس، <em>ایسنا</em> جواب می‌دهد</h1>
-    <p class="lead">موضوع موردنظرت را بنویس تا مرتبط‌ترین اخبار ایسنا را پیدا کنیم و برایت خلاصه کنیم.</p>
-    <p class="fresh" id="fresh">این پاسخ‌ها بر اساس اخبار ایسنا از ساعت ۰۰:۰۰ امروز تا کنون (حدود <?php echo $hours; ?> ساعت اخیر) است.</p>
+    <div class="eyebrow">دستیار خبری هوشمند</div>
+    <h1>هر سوالی داری، از اخبار امروز <em>ایسنا</em> جواب بگیر</h1>
+    <p class="lead">سوالت را بنویس؛ مرتبط‌ترین خبرهای امروز را پیدا می‌کنیم و در چند خط پاسخ می‌دهیم.</p>
 
     <form class="searchbox" id="f">
       <input type="text" id="q" placeholder="مثلاً: چه خبر از هوش مصنوعی؟" autocomplete="off" required>
@@ -87,6 +83,7 @@ p.lead{color:var(--lo);font-size:15.5px;max-width:640px}
     <div class="status" id="status"></div>
     <div class="answer-box" id="answerBox" style="display:none">
       <div class="lbl">پاسخ</div>
+      <div class="short-badge" id="shortBadge" style="display:none"></div>
       <p id="answerText"></p>
     </div>
     <div class="sources-lbl" id="sourcesLbl" style="display:none">بر اساس این خبرها:</div>
@@ -97,9 +94,9 @@ p.lead{color:var(--lo);font-size:15.5px;max-width:640px}
 <script>
 const f = document.getElementById('f'), q = document.getElementById('q'),
       btn = document.getElementById('btn'), statusEl = document.getElementById('status'),
-      results = document.getElementById('results'), fresh = document.getElementById('fresh'),
+      results = document.getElementById('results'),
       answerBox = document.getElementById('answerBox'), answerText = document.getElementById('answerText'),
-      sourcesLbl = document.getElementById('sourcesLbl');
+      shortBadge = document.getElementById('shortBadge'), sourcesLbl = document.getElementById('sourcesLbl');
 
 f.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -122,23 +119,28 @@ f.addEventListener('submit', async (e) => {
       statusEl.textContent = (data.error || 'خطایی رخ داد.') + (data.debug ? ' — خام: ' + JSON.stringify(data.debug).slice(0, 500) : '');
       btn.disabled = false; return;
     }
-    if (data.hours !== undefined) {
-      fresh.textContent = 'این پاسخ‌ها بر اساس اخبار ایسنا از ساعت ۰۰:۰۰ امروز تا کنون (حدود ' + data.hours + ' ساعت اخیر) است.';
-    }
-    if (!data.results.length || !data.answer) {
+    if (!data.answer) {
       statusEl.textContent = 'خبر مرتبطی در بازه‌ی امروز پیدا نشد.';
     } else {
       statusEl.textContent = '';
+      if (data.short) {
+        shortBadge.textContent = data.short;
+        shortBadge.style.display = 'inline-block';
+      } else {
+        shortBadge.style.display = 'none';
+      }
       answerText.textContent = data.answer;
       answerBox.style.display = 'block';
-      sourcesLbl.style.display = 'block';
-      results.innerHTML = data.results.map(n => `
-        <div class="card">
-          <div class="tag">${n.cat || 'ایسنا'}</div>
-          <h3><a href="${n.link}" target="_blank" rel="noopener">${n.title}</a></h3>
-          <p>${n.summary}</p>
-        </div>
-      `).join('');
+      if (data.results.length) {
+        sourcesLbl.style.display = 'block';
+        results.innerHTML = data.results.map(n => `
+          <div class="card">
+            <div class="tag">${n.cat || 'ایسنا'}</div>
+            <h3><a href="${n.link}" target="_blank" rel="noopener">${n.title}</a></h3>
+            <p>${n.summary}</p>
+          </div>
+        `).join('');
+      }
     }
   } catch (err) {
     clearTimeout(slowNotice);
